@@ -13,21 +13,22 @@ struct House<'a> {
 }
 
 impl<'a> House<'a> {
+    #[allow(dead_code)]
     fn get_rooms(&self) -> Vec<String> {
         self.rooms.iter().map(|x| x.name.clone()).collect()
     }
     fn add_room(&mut self, room: Room<'a>) -> bool {
-        if let Some(d) = self.rooms.iter().find(|d| d.name == room.name) {
+        if let Some(_d) = self.rooms.iter().find(|d| d.name == room.name) {
             false
         } else {
             self.rooms.push(room);
             true
         }
     }
-
+    #[allow(dead_code)]
     fn get_room(&self, room_name: String) -> Result<&Room, String> {
         if let Some(d) = self.rooms.iter().find(|d| d.name == room_name) {
-            Ok(&d)
+            Ok(d)
         } else {
             Err("Device not found".to_string())
         }
@@ -42,17 +43,17 @@ struct Room<'a> {
 
 impl<'a> Room<'a> {
     fn add_device(&mut self, deivce_name: String, device: &'a dyn Device) -> bool {
-        if let Some(d) = self.devices.iter().find(|d| d.name == deivce_name) {
+        if let Some(_d) = self.devices.iter().find(|d| d.name == deivce_name) {
             false
         } else {
             self.devices.push(StoredDevice {
                 name: deivce_name,
-                device: device,
+                device,
             });
             true
         }
     }
-
+    #[allow(dead_code)]
     fn get_devices(&self) -> Vec<String> {
         self.devices.iter().map(|x| x.name.clone()).collect()
     }
@@ -206,12 +207,12 @@ fn main() {
         devices: Vec::new(),
     };
 
-    let mut electrical_outlet_1 = ElectricalOutlet {
+    let electrical_outlet_1 = ElectricalOutlet {
         state: DeviceState::Off,
         power: 0.0,
     };
 
-    let mut electrical_outlet_2 = ElectricalOutlet {
+    let electrical_outlet_2 = ElectricalOutlet {
         state: DeviceState::Off,
         power: 0.0,
     };
@@ -234,14 +235,6 @@ fn main() {
     bathroom.add_device("Thermometer".to_string(), &bathroom_thermometer);
 
     my_house.add_room(bathroom);
-
-    {
-        if let Ok(kitchen) = my_house.get_room("Kitchen".to_string()) {
-            println!("Kitchen has : {:#?} devices", kitchen.get_devices());
-        } else {
-            println!("Not found room kitchen");
-        }
-    }
 
     print_report(my_house);
 }
