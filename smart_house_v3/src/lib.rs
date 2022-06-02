@@ -32,7 +32,6 @@ mod tests {
 
     #[test]
     fn test_print_report_for_stored_device() {
-
         let device = device::electrical_outlet::ElectricalOutlet {
             state: device::DeviceState::Off,
             power: 0.0,

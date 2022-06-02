@@ -1,5 +1,5 @@
-use std::fmt::Debug;
 use crate::device::{Device, DeviceState};
+use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct Thermometer {
@@ -30,7 +30,6 @@ impl Device for Thermometer {
         String::from("Thermometer. Can turn on and turn off. Collect temperature.")
     }
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -72,7 +71,10 @@ mod tests {
             temperature: 0.0,
         };
 
-        assert_eq!(thermometer.get_descripion(), "Thermometer. Can turn on and turn off. Collect temperature.".to_string())
+        assert_eq!(
+            thermometer.get_descripion(),
+            "Thermometer. Can turn on and turn off. Collect temperature.".to_string()
+        )
     }
 
     #[test]
@@ -111,5 +113,4 @@ mod tests {
 
         assert_eq!(thermometer.get_state(), DeviceState::Off)
     }
-
 }

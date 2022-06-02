@@ -1,5 +1,5 @@
-use std::fmt::Debug;
 use crate::edifice::room::Room;
+use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct House<'a> {
@@ -30,7 +30,6 @@ impl<'a> House<'a> {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -53,10 +52,10 @@ mod tests {
 
         let room = Room {
             name: "Kitchen".to_string(),
-            devices: Vec::new()
+            devices: Vec::new(),
         };
 
-        assert_eq!(house.add_room( room ), true);
+        assert_eq!(house.add_room(room), true);
     }
 
     #[test]
@@ -68,17 +67,17 @@ mod tests {
 
         let room1 = Room {
             name: "Kitchen".to_string(),
-            devices: Vec::new()
+            devices: Vec::new(),
         };
 
         let room2 = Room {
             name: "Kitchen".to_string(),
-            devices: Vec::new()
+            devices: Vec::new(),
         };
 
-        house.add_room( room1 );
+        house.add_room(room1);
 
-        assert_eq!(house.add_room( room2 ), false);
+        assert_eq!(house.add_room(room2), false);
     }
 
     #[test]
@@ -95,12 +94,10 @@ mod tests {
     fn test_get_rooms_for_non_empty_house() {
         let house = House {
             name: "Test house".to_string(),
-            rooms: vec![
-                Room {
-                    name: "Kitchen".to_string(),
-                    devices: Vec::new()
-                },
-            ],
+            rooms: vec![Room {
+                name: "Kitchen".to_string(),
+                devices: Vec::new(),
+            }],
         };
 
         assert_eq!(house.get_rooms(), vec!["Kitchen"]);
@@ -120,12 +117,10 @@ mod tests {
     fn test_get_existed_room_from_non_empty_house() {
         let house = House {
             name: "Test house".to_string(),
-            rooms: vec![
-                Room {
-                    name: "Kitchen".to_string(),
-                    devices: Vec::new()
-                },
-            ],
+            rooms: vec![Room {
+                name: "Kitchen".to_string(),
+                devices: Vec::new(),
+            }],
         };
 
         assert_eq!(house.get_room("Kitchen".to_string()).is_ok(), true);

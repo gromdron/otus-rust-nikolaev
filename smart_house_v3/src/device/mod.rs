@@ -1,5 +1,5 @@
-use std::fmt::Debug;
 use crate::report;
+use std::fmt::Debug;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum DeviceState {

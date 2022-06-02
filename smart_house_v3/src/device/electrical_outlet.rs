@@ -1,5 +1,5 @@
-use std::fmt::Debug;
 use crate::device::{Device, DeviceState};
+use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct ElectricalOutlet {
@@ -71,7 +71,10 @@ mod tests {
             power: 0.0,
         };
 
-        assert_eq!(electrical_outlet.get_descripion(), "Electrical outlet. Can turn on and turn off".to_string())
+        assert_eq!(
+            electrical_outlet.get_descripion(),
+            "Electrical outlet. Can turn on and turn off".to_string()
+        )
     }
 
     #[test]
@@ -110,5 +113,4 @@ mod tests {
 
         assert_eq!(electrical_outlet.get_state(), DeviceState::Off)
     }
-
 }

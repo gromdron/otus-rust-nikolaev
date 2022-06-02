@@ -66,7 +66,10 @@ mod tests {
             rooms: Vec::new(),
         };
 
-        assert_eq!(house.get_report(), "\"Without room\" report: \r\nExist 0 room(s), \r\n".to_string())
+        assert_eq!(
+            house.get_report(),
+            "\"Without room\" report: \r\nExist 0 room(s), \r\n".to_string()
+        )
     }
 
     #[test]
@@ -83,7 +86,11 @@ mod tests {
 
         house.add_room(room);
 
-        assert_eq!(house.get_report(), "\"With room\" report: \r\nExist 1 room(s), \r\nRoom \"Kitchen\" has devices: \r\n\r\n".to_string())
+        assert_eq!(
+            house.get_report(),
+            "\"With room\" report: \r\nExist 1 room(s), \r\nRoom \"Kitchen\" has devices: \r\n\r\n"
+                .to_string()
+        )
     }
 
     #[test]
@@ -93,9 +100,11 @@ mod tests {
             devices: Vec::new(),
         };
 
-       assert_eq!(room.get_report(), "Room \"Kitchen\" has devices: \r\n".to_string())
+        assert_eq!(
+            room.get_report(),
+            "Room \"Kitchen\" has devices: \r\n".to_string()
+        )
     }
-
 
     #[test]
     fn test_text_for_stored_device() {
@@ -109,7 +118,10 @@ mod tests {
             device: &device,
         };
 
-        assert_eq!(stored_device.get_report(), "Device \"Stored device\" state is: Off, power: 0.0".to_string())
+        assert_eq!(
+            stored_device.get_report(),
+            "Device \"Stored device\" state is: Off, power: 0.0".to_string()
+        )
     }
 
     #[test]

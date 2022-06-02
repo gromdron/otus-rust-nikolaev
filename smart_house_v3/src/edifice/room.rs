@@ -1,5 +1,5 @@
-use std::fmt::Debug;
 use crate::device::{Device, StoredDevice};
+use std::fmt::Debug;
 
 #[derive(Debug)]
 pub struct Room<'a> {
@@ -51,7 +51,7 @@ mod tests {
             temperature: 0.0,
         };
 
-        assert_eq!(room.add_device( "Thermometer".to_string(), &device ), true);
+        assert_eq!(room.add_device("Thermometer".to_string(), &device), true);
     }
 
     #[test]
@@ -71,14 +71,13 @@ mod tests {
             temperature: 0.0,
         };
 
-        room.add_device( "Thermometer".to_string(), &device1 );
+        room.add_device("Thermometer".to_string(), &device1);
 
-        assert_eq!(room.add_device( "Thermometer".to_string(), &device2 ), false);
+        assert_eq!(room.add_device("Thermometer".to_string(), &device2), false);
     }
 
     #[test]
     fn test_get_devices_for_empty_room() {
-
         let room = Room {
             name: "Test room".to_string(),
             devices: Vec::new(),
@@ -99,7 +98,7 @@ mod tests {
             temperature: 0.0,
         };
 
-        room.add_device( "Thermometer".to_string(), &device1 );
+        room.add_device("Thermometer".to_string(), &device1);
 
         assert_eq!(room.get_devices(), vec!["Thermometer"]);
     }

@@ -1,4 +1,4 @@
-use smart_house_v3::{edifice, device, print_report};
+use smart_house_v3::{device, edifice, print_report};
 
 fn main() {
     let mut my_house = edifice::house::House {
