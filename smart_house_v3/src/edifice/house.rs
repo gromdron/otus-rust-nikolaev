@@ -1,4 +1,5 @@
 use crate::edifice::room::Room;
+use crate::device::Device;
 use std::fmt::Debug;
 
 #[derive(Debug)]
@@ -21,9 +22,21 @@ impl<'a> House<'a> {
         }
     }
     #[allow(dead_code)]
-    pub fn get_room(&self, room_name: String) -> Result<&Room, String> {
+    pub fn get_room(&self, room_name: String) -> Result<&Room<'a>, String> {
         if let Some(d) = self.rooms.iter().find(|d| d.name == room_name) {
             Ok(d)
+        } else {
+            Err("Room not found".to_string())
+        }
+    }
+    #[allow(dead_code)]
+    pub fn get_device_by_names(&mut self, room_name: String, device_name: String ) -> Result<&mut dyn Device, String> {
+        if let Some(room) = self.rooms.iter_mut().find(|r| r.name == room_name) {
+            if let Some(d) = room.devices.iter_mut().find(|d| d.name == device_name) {
+                Ok(d.device)
+            } else {
+                Err("Device not found".to_string())
+            }
         } else {
             Err("Room not found".to_string())
         }
@@ -33,6 +46,7 @@ impl<'a> House<'a> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::*;
 
     #[test]
     #[allow(unused_variables)]
@@ -124,5 +138,63 @@ mod tests {
         };
 
         assert_eq!(house.get_room("Kitchen".to_string()).is_ok(), true);
+    }
+
+    #[test]
+    fn test_get_device_by_room_and_device_names() {
+        let mut house = edifice::house::House {
+            name: "Test house".to_string(),
+            rooms: Vec::new(),
+        };
+
+        let mut room = edifice::room::Room {
+            name: "Kitchen".to_string(),
+            devices: Vec::new(),
+        };
+
+        let mut thermometer = device::thermometer::Thermometer {
+            state: device::DeviceState::On,
+            temperature: 10.0,
+        };
+
+        room.add_device("Thermometer".to_string(), &mut thermometer);
+        house.add_room(room);
+
+        let device = house.get_device_by_names("Kitchen".to_string(), "Thermometer".to_string());
+        assert_eq!(device.is_ok(), true);
+    }
+
+    #[test]
+    fn test_turn_off_device_getted_by_name_and_print_report() {
+        let mut house = edifice::house::House {
+            name: "Test house".to_string(),
+            rooms: Vec::new(),
+        };
+
+        let mut room = edifice::room::Room {
+            name: "Kitchen".to_string(),
+            devices: Vec::new(),
+        };
+
+        let mut thermometer = device::thermometer::Thermometer {
+            state: device::DeviceState::On,
+            temperature: 10.0,
+        };
+
+        room.add_device("Thermometer".to_string(), &mut thermometer);
+        house.add_room(room);
+
+        let device = house.get_device_by_names("Kitchen".to_string(), "Thermometer".to_string());
+
+        assert_eq!(device.is_ok(), true);
+
+        let device = device.unwrap();
+
+        assert_eq!(device.get_state(), device::DeviceState::On);
+
+        device.turn_off();
+
+        assert_eq!(device.get_state(), device::DeviceState::Off);
+
     }
 }

@@ -15,12 +15,14 @@ pub trait Device: Debug + report::Report {
     fn turn_on(&mut self);
 
     fn turn_off(&mut self);
+
+    fn get_type(&self) -> String;
 }
 
 #[derive(Debug)]
 pub struct StoredDevice<'a> {
     pub name: String,
-    pub device: &'a dyn Device,
+    pub device: &'a mut dyn Device,
 }
 
 pub mod electrical_outlet;

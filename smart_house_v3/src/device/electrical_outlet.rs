@@ -29,6 +29,10 @@ impl Device for ElectricalOutlet {
     fn get_descripion(&self) -> String {
         String::from("Electrical outlet. Can turn on and turn off")
     }
+
+    fn get_type(&self) -> String {
+        String::from("electrical_outlet")
+    }
 }
 
 #[cfg(test)]

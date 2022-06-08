@@ -108,14 +108,14 @@ mod tests {
 
     #[test]
     fn test_text_for_stored_device() {
-        let device = crate::device::electrical_outlet::ElectricalOutlet {
+        let mut device = crate::device::electrical_outlet::ElectricalOutlet {
             state: crate::device::DeviceState::Off,
             power: 0.0,
         };
 
         let stored_device = crate::device::StoredDevice {
             name: "Stored device".to_string(),
-            device: &device,
+            device: &mut device,
         };
 
         assert_eq!(

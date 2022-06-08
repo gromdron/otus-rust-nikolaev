@@ -29,6 +29,10 @@ impl Device for Thermometer {
     fn get_descripion(&self) -> String {
         String::from("Thermometer. Can turn on and turn off. Collect temperature.")
     }
+
+    fn get_type(&self) -> String {
+        String::from("thermometer")
+    }
 }
 
 #[cfg(test)]

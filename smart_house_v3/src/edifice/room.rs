@@ -8,13 +8,13 @@ pub struct Room<'a> {
 }
 
 impl<'a> Room<'a> {
-    pub fn add_device(&mut self, deivce_name: String, device: &'a dyn Device) -> bool {
+    pub fn add_device(&mut self, deivce_name: String, device: &'a mut dyn Device) -> bool {
         if let Some(_d) = self.devices.iter().find(|d| d.name == deivce_name) {
             false
         } else {
             self.devices.push(StoredDevice {
                 name: deivce_name,
-                device,
+                device: device,
             });
             true
         }
@@ -46,12 +46,12 @@ mod tests {
             devices: Vec::new(),
         };
 
-        let device = device::thermometer::Thermometer {
+        let mut device = device::thermometer::Thermometer {
             state: device::DeviceState::Off,
             temperature: 0.0,
         };
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &device), true);
+        assert_eq!(room.add_device("Thermometer".to_string(), &mut device), true);
     }
 
     #[test]
@@ -61,19 +61,19 @@ mod tests {
             devices: Vec::new(),
         };
 
-        let device1 = device::thermometer::Thermometer {
+        let mut device1 = device::thermometer::Thermometer {
             state: device::DeviceState::Off,
             temperature: 0.0,
         };
 
-        let device2 = device::thermometer::Thermometer {
+        let mut device2 = device::thermometer::Thermometer {
             state: device::DeviceState::Off,
             temperature: 0.0,
         };
 
-        room.add_device("Thermometer".to_string(), &device1);
+        room.add_device("Thermometer".to_string(), &mut device1);
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &device2), false);
+        assert_eq!(room.add_device("Thermometer".to_string(), &mut device2), false);
     }
 
     #[test]
@@ -93,12 +93,12 @@ mod tests {
             devices: Vec::new(),
         };
 
-        let device1 = device::thermometer::Thermometer {
+        let mut device1 = device::thermometer::Thermometer {
             state: device::DeviceState::Off,
             temperature: 0.0,
         };
 
-        room.add_device("Thermometer".to_string(), &device1);
+        room.add_device("Thermometer".to_string(), &mut device1);
 
         assert_eq!(room.get_devices(), vec!["Thermometer"]);
     }

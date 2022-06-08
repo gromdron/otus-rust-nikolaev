@@ -32,14 +32,14 @@ mod tests {
 
     #[test]
     fn test_print_report_for_stored_device() {
-        let device = device::electrical_outlet::ElectricalOutlet {
+        let mut device = device::electrical_outlet::ElectricalOutlet {
             state: device::DeviceState::Off,
             power: 0.0,
         };
 
         let stored_device = device::StoredDevice {
             name: "Stored device".to_string(),
-            device: &device,
+            device: &mut device,
         };
 
         print_report(stored_device);
