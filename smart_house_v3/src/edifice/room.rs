@@ -14,7 +14,7 @@ impl<'a> Room<'a> {
         } else {
             self.devices.push(StoredDevice {
                 name: deivce_name,
-                device: device,
+                device,
             });
             true
         }
@@ -51,7 +51,10 @@ mod tests {
             temperature: 0.0,
         };
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &mut device), true);
+        assert_eq!(
+            room.add_device("Thermometer".to_string(), &mut device),
+            true
+        );
     }
 
     #[test]
@@ -73,7 +76,10 @@ mod tests {
 
         room.add_device("Thermometer".to_string(), &mut device1);
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &mut device2), false);
+        assert_eq!(
+            room.add_device("Thermometer".to_string(), &mut device2),
+            false
+        );
     }
 
     #[test]

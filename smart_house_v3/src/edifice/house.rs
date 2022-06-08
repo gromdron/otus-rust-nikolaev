@@ -1,5 +1,5 @@
-use crate::edifice::room::Room;
 use crate::device::Device;
+use crate::edifice::room::Room;
 use std::fmt::Debug;
 
 #[derive(Debug)]
@@ -30,7 +30,11 @@ impl<'a> House<'a> {
         }
     }
     #[allow(dead_code)]
-    pub fn get_device_by_names(&mut self, room_name: String, device_name: String ) -> Result<&mut dyn Device, String> {
+    pub fn get_device_by_names(
+        &mut self,
+        room_name: String,
+        device_name: String,
+    ) -> Result<&mut dyn Device, String> {
         if let Some(room) = self.rooms.iter_mut().find(|r| r.name == room_name) {
             if let Some(d) = room.devices.iter_mut().find(|d| d.name == device_name) {
                 Ok(d.device)
@@ -195,6 +199,5 @@ mod tests {
         device.turn_off();
 
         assert_eq!(device.get_state(), device::DeviceState::Off);
-
     }
 }
