@@ -21,8 +21,12 @@ fn main() {
         power: 0.0,
     };
 
-    kitchen.add_device("Near microwave".to_string(), &electrical_outlet_1).unwrap();
-    kitchen.add_device("Near teapot".to_string(), &electrical_outlet_2).unwrap();
+    kitchen
+        .add_device("Near microwave".to_string(), &electrical_outlet_1)
+        .unwrap();
+    kitchen
+        .add_device("Near teapot".to_string(), &electrical_outlet_2)
+        .unwrap();
 
     my_house.add_room(kitchen).unwrap();
 
@@ -36,7 +40,9 @@ fn main() {
         temperature: 0.0,
     };
 
-    bathroom.add_device("Thermometer".to_string(), &bathroom_thermometer).unwrap();
+    bathroom
+        .add_device("Thermometer".to_string(), &bathroom_thermometer)
+        .unwrap();
 
     my_house.add_room(bathroom).unwrap();
 

@@ -8,9 +8,13 @@ pub struct Room<'a> {
 }
 
 impl<'a> Room<'a> {
-    pub fn add_device(&mut self, deivce_name: String, device: &'a dyn Device) -> Result<(), String> {
+    pub fn add_device(
+        &mut self,
+        deivce_name: String,
+        device: &'a dyn Device,
+    ) -> Result<(), String> {
         if let Some(_d) = self.devices.iter().find(|d| d.name == deivce_name) {
-            Err( format!("Device with name {:?} already exist", deivce_name).to_string() )
+            Err(format!("Device with name {:?} already exist", deivce_name))
         } else {
             self.devices.push(StoredDevice {
                 name: deivce_name,
@@ -51,7 +55,10 @@ mod tests {
             temperature: 0.0,
         };
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &device).is_ok(), true);
+        assert_eq!(
+            room.add_device("Thermometer".to_string(), &device).is_ok(),
+            true
+        );
     }
 
     #[test]
@@ -71,9 +78,14 @@ mod tests {
             temperature: 0.0,
         };
 
-        room.add_device("Thermometer".to_string(), &device1).unwrap();
+        room.add_device("Thermometer".to_string(), &device1)
+            .unwrap();
 
-        assert_eq!(room.add_device("Thermometer".to_string(), &device2).is_err(), true);
+        assert_eq!(
+            room.add_device("Thermometer".to_string(), &device2)
+                .is_err(),
+            true
+        );
     }
 
     #[test]
@@ -98,7 +110,8 @@ mod tests {
             temperature: 0.0,
         };
 
-        room.add_device("Thermometer".to_string(), &device1).unwrap();
+        room.add_device("Thermometer".to_string(), &device1)
+            .unwrap();
 
         assert_eq!(room.get_devices(), vec!["Thermometer"]);
     }

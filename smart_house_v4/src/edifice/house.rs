@@ -12,9 +12,9 @@ impl<'a> House<'a> {
     pub fn get_rooms(&self) -> Vec<String> {
         self.rooms.iter().map(|x| x.name.clone()).collect()
     }
-    pub fn add_room(&mut self, room: Room<'a>) -> Result<(),String> {
+    pub fn add_room(&mut self, room: Room<'a>) -> Result<(), String> {
         if let Some(d) = self.rooms.iter().find(|d| d.name == room.name) {
-            Err( format!("Room with name {:?} already exist", d.name.clone()) )
+            Err(format!("Room with name {:?} already exist", d.name.clone()))
         } else {
             self.rooms.push(room);
             Ok(())
