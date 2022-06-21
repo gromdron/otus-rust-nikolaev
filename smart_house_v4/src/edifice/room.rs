@@ -55,10 +55,7 @@ mod tests {
             temperature: 0.0,
         };
 
-        assert_eq!(
-            room.add_device("Thermometer".to_string(), &device).is_ok(),
-            true
-        );
+        assert!(room.add_device("Thermometer".to_string(), &device).is_ok());
     }
 
     #[test]
@@ -81,11 +78,7 @@ mod tests {
         room.add_device("Thermometer".to_string(), &device1)
             .unwrap();
 
-        assert_eq!(
-            room.add_device("Thermometer".to_string(), &device2)
-                .is_err(),
-            true
-        );
+        assert!(room.add_device("Thermometer".to_string(), &device2).is_err());
     }
 
     #[test]

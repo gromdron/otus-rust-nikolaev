@@ -51,7 +51,7 @@ mod tests {
             devices: Vec::new(),
         };
 
-        assert_eq!(house.add_room(room).is_ok(), true);
+        assert!(house.add_room(room).is_ok());
     }
 
     #[test]
@@ -73,7 +73,7 @@ mod tests {
 
         house.add_room(room1).unwrap();
 
-        assert_eq!(house.add_room(room2).is_err(), true);
+        assert!(house.add_room(room2).is_err());
     }
 
     #[test]
@@ -106,7 +106,7 @@ mod tests {
             rooms: Vec::new(),
         };
 
-        assert_eq!(house.get_room("Kitchen".to_string()).is_none(), true);
+        assert!(house.get_room("Kitchen".to_string()).is_none());
     }
 
     #[test]
@@ -119,6 +119,6 @@ mod tests {
             }],
         };
 
-        assert_eq!(house.get_room("Kitchen".to_string()).is_some(), true);
+        assert!(house.get_room("Kitchen".to_string()).is_some());
     }
 }
