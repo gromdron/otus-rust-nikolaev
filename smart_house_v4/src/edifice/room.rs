@@ -78,7 +78,9 @@ mod tests {
         room.add_device("Thermometer".to_string(), &device1)
             .unwrap();
 
-        assert!(room.add_device("Thermometer".to_string(), &device2).is_err());
+        assert!(room
+            .add_device("Thermometer".to_string(), &device2)
+            .is_err());
     }
 
     #[test]
