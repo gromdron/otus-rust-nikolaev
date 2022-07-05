@@ -1,0 +1,8 @@
+[workspace]
+
+members = [
+	"stp",
+	"smart_socket_server",
+	"smart_socket_client",
+	"smart_socket_tui"
+]

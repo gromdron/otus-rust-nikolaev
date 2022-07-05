@@ -1,0 +1,10 @@
+[package]
+name = "smart_socket_tui"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+smart_socket_client = { path = "../smart_socket_client" }
+anyhow = "1.0.51"
