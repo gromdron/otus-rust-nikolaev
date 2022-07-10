@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+	"thermometer_server",
+	"thermometer_client",
+]
