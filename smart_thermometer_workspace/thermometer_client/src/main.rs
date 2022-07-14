@@ -39,14 +39,35 @@ fn main() -> Result<(), Box<dyn Error>> {
             return;
         }
 
-        let mut buf = [0; 4];
-        if let Err(err) = socket.recv_from(&mut buf) {
+        let mut buf = [0; 5];
+
+        let recv = socket.recv_from(&mut buf);
+
+        if let Err(err) = recv {
             println!("can't receive datagram: {err}");
             continue;
         }
 
-        let val = f32::from_be_bytes(buf);
-        temperature_clone.set(val);
+        let (amt, _src) = recv.unwrap();
+
+        if amt != 5 {
+            println!("incorrect datagram received");
+            continue;
+        }
+
+        let char_symbol = buf[0].clone();
+
+        match char::from(char_symbol) {
+            't' => {
+                let temp_array = [ buf[1], buf[2], buf[3], buf[4] ];
+                let val = f32::from_be_bytes(temp_array);
+                temperature_clone.set(val);
+            },
+
+            _ => {
+                println!("incorrect datagram received")
+            },
+        }
     });
 
     for _ in 0..120 {
