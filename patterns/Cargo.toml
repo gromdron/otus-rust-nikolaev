@@ -2,5 +2,5 @@
 
 members = [
 	"command",
-	#"thermometer_client",
+	"builder",
 ]
