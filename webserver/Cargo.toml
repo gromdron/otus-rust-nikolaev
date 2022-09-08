@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+	"smart_house",
+	"smart_house_server"
+	#"thermometer_client",
+]
